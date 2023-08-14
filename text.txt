@@ -1,0 +1,102 @@
+#include <iostream>
+#include <vector>
+
+struct User {
+    std::string username;
+    std::string password;
+    double balance;
+    // Other user data
+};
+
+struct Transaction {
+    std::string sender;
+    std::string receiver;
+    double amount;
+    // Other transaction data
+};
+
+void registerUser(std::vector<User>& users) {
+    // Implementation for user registration
+}
+
+User* loginUser(const std::string& username, const std::string& password, std::vector<User>& users) {
+    // Implementation for user login
+}
+
+void checkBalance(const User& user) {
+    // Implementation for balance inquiry
+}
+
+void transferMoney(User& sender, User& receiver, double amount, std::vector<Transaction>& transactions) {
+    // Implementation for money transfer
+}
+
+// Other functions for additional functionalities (e.g., airtime purchase, transaction history, etc.)
+
+int main() {
+    std::vector<User> users;
+    std::vector<Transaction> transactions;
+
+    while (true) {
+        std::cout << "Vodafone Cash Mini Console Application\n";
+        std::cout << "1. Register\n";
+        std::cout << "2. Login\n";
+        std::cout << "3. Exit\n";
+        
+        int choice;
+        std::cin >> choice;
+
+        switch (choice) {
+            case 1:
+                registerUser(users);
+                break;
+            case 2: {
+                std::string username, password;
+                // Get username and password from user
+                User* loggedInUser = loginUser(username, password, users);
+                if (loggedInUser) {
+                    // Display logged-in menu options
+                    while (true) {
+                        std::cout << "Logged In Menu\n";
+                        std::cout << "1. Check Balance\n";
+                        std::cout << "2. Transfer Money\n";
+                        // Add more options
+                        std::cout << "9. Logout\n";
+                        
+                        int loggedInChoice;
+                        std::cin >> loggedInChoice;
+
+                        switch (loggedInChoice) {
+                            case 1:
+                                checkBalance(*loggedInUser);
+                                break;
+                            case 2:
+                                // Call transferMoney function
+                                break;
+                            // Implement other cases
+                            case 9:
+                                std::cout << "Logging out...\n";
+                                break;
+                            default:
+                                std::cout << "Invalid choice\n";
+                        }
+
+                        if (loggedInChoice == 9) {
+                            break; // Exit logged-in menu loop
+                        }
+                    }
+                } else {
+                    std::cout << "Login failed\n";
+                }
+                break;
+            }
+            case 3:
+                std::cout << "Exiting...\n";
+                return 0;
+            default:
+                std::cout << "Invalid choice\n";
+        }
+    }
+
+    return 0;
+}
